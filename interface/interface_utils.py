@@ -1,6 +1,7 @@
 
 import dash_mantine_components as dmc
 from dash import html
+import json
 
 def textbox(text, box):
 
@@ -16,22 +17,26 @@ def textbox(text, box):
         style["margin-left"] = "auto"
         style["margin-right"] = 0
 
-        return dmc.Card(text, style=style)
+        return html.Div(dmc.Card(text, style=style))
 
-    elif box == "AI":
+    elif box == "ai":
         style["margin-left"] = 0
         style["margin-right"] = "auto"
 
         thumbnail = html.Div(dmc.Avatar(
             src="/assets/favicon.ico",
             style={
-                #"position": "absolute",
                 "top": "5px",  # Moves the avatar lower
-                #"transform": "translateX(-50%)"  # Adjusts for the avatar's width
             }
         ), className="one columns")
 
-        textbox = html.Div(dmc.Card(text, style=style), className="nine columns")
+        json_format = json.loads(text)["summaries"]
+        lists = []
+        for row in json_format:
+            lists += [dmc.ListItem(dmc.Text(row["Description"], style={"fontSize": "12px"}))]
+        summary = dmc.List(lists)
+
+        textbox = html.Div(dmc.Card(summary, style=style), className="nine columns")
 
         return html.Div([thumbnail, textbox])
 

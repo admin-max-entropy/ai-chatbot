@@ -16,8 +16,12 @@ conversation = html.Div(
     style={
         "overflow-y": "auto",
         "display": "flex",
-        "height": "calc(90vh - 132px)",
         "flex-direction": "column-reverse",
+        "height": "calc(90vh - 132px)",  # Dynamically calculated height
+        "width": "60%",  # Adjusts the width
+        "margin": "0 auto",  # Centers the container horizontally
+        "padding": "10px",  # Adds some padding to avoid content sticking to the edges
+        "boxSizing": "border-box",  # Ensures padding is included in the width and height
     },
 )
 
@@ -28,7 +32,16 @@ controls = dmc.Textarea(
                 radius="xl",
                 autosize=True,
                 minRows=6,
-                rightSection=dmc.Button(
+
+    style={
+        "width": "60%",  # Adjusts the width to 80% of the parent container
+        "margin": "0 auto",  # Centers the textarea on the screen
+        "alignItems": "center",  # Vertical centering
+        "justifyContent": "center",  # Horizontal centering
+    },
+                rightSection=html.Div(
+                    children=[
+                        dmc.Button(
                     size="xl",  # Small size for the button
                     id=config.APP_ID_USER_SUBMIT,
                     variant="subtle",
@@ -37,21 +50,24 @@ controls = dmc.Textarea(
                         "position": "absolute",  # Allows precise positioning
                         "right": "10px",  # Distance from the right edge
                         "bottom": "10px",  # Distance from the bottom edge
-                    }
+                    },
+                    loaderProps={"type": "dots"}
+                )],
                 ),
             )
 
-app.layout = dmc.MantineProvider(dmc.Container(
-    fluid=False,
+app.layout = dmc.MantineProvider(html.Div(
     children=[
         dcc.Store(id=config.APP_ID_STORE_CONTENT, data=""),
-        conversation,
-        controls,
+        html.Div(children=[conversation], className="row"),
+        html.Div(children=[controls], className="row"),
     ],
+    className="row"
 ),
     forceColorScheme="dark",
 theme={
-        "colorScheme": "dark",
+        "colorScheme"
+        "": "dark",
     },
 )
 
