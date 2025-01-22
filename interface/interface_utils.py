@@ -2,6 +2,7 @@
 import dash_mantine_components as dmc
 from dash import html
 import json
+from dash_iconify import DashIconify
 
 def textbox(text, box):
 
@@ -33,7 +34,18 @@ def textbox(text, box):
         json_format = json.loads(text)["summaries"]
         lists = []
         for row in json_format:
-            lists += [dmc.ListItem(dmc.Text(row["Description"], style={"fontSize": "12px"}))]
+            sources = row["Source"]
+            sources = sources.split(";")
+            text_component = [f"{row['Description']}\n\n"]
+            for source in sources:
+                text_component += [dmc.Anchor(href=source, target="_blank",
+                                              children=[
+                                                  DashIconify(icon="noto:link"),  # Iconify icon
+                                              ],
+                                              )]
+
+            lists += [dmc.ListItem(dmc.Text(text_component, style={"fontSize": "12px"}))]
+
         summary = dmc.List(lists)
 
         textbox = html.Div(dmc.Card(summary, style=style), className="nine columns")

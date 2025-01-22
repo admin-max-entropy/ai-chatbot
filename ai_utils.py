@@ -28,7 +28,7 @@ def summarize_speech(speech_text):
         functions=[
             {
                 "name": "summarize_speech",
-                "description": "Summarizes a speech into key points.",
+                "description": "Summarizes a speech into 3-5 key points.",
                 "parameters": {
                     "type": "object",
                     "properties": {
@@ -38,11 +38,12 @@ def summarize_speech(speech_text):
                                 "type": "object",
                                 "properties": {
                                     "Title": {"type": "string"},
-                                    "Description": {"type": "string"}
+                                    "Description": {"type": "string"},
+                                    "Source": {"type": "string"},
                                 },
-                                "required": ["Title", "Description"]
+                                "required": ["Title", "Description", "Source"]
                             },
-                            "description": "An array of key points summarizing the speech."
+                            "description": "An array of key points summarizing the speech and the URL sources."
                         }
                     },
                     "required": ["summaries"]
@@ -54,7 +55,7 @@ def summarize_speech(speech_text):
     raw_arguments = completion.choices[0].message.function_call.arguments
     return raw_arguments
 
-summarize_speech("what is the dual mandate")
+#summarize_speech("what is the dual mandate")
 
 def get_pc():
     pc = Pinecone(api_key="pcsk_36hKfz_6GL8ztjrsZZicZyCdeUZkEV1D3fBAcooULof9ZZ8zSq9wjjTA6BNKoE1en36KRU")
@@ -85,3 +86,5 @@ def similarity_search_with_relevance_scores_pinecone(query, top_k):
         for match in results["matches"]
     ]
     return processed_results
+
+# similarity_search_with_relevance_scores_pinecone("what is the dual mandate?", top_k=30)

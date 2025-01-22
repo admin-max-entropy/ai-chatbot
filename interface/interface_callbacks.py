@@ -66,10 +66,12 @@ def run_chatbot(n_clicks, n_submit, user_input, chat_history):
     else:
         selected_text = ""
         for i, (doc, ratio) in enumerate(results, 1):
+            print(doc)
             selected_text += (
                 f"{i}. Author: {doc['author']}\n"
                 f"   Publication Date: {doc['date']}\n"
                 f"   Content Preview: {doc['text']}...\n\n"
+                f"   URL in: {doc['link']}...\n\n"
             )
             selected_text += prompt_input
 
