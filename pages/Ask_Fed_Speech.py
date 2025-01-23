@@ -67,7 +67,7 @@ layout = (
                                 dmc.Button(
                                     variant="subtle",
                                     rightSection=DashIconify(
-                                        icon="streamline:cursor-click-solid", width=30
+                                        icon="streamline:cursor-click-solid", width=25
                                     ),
                                     color="blue",
                                     size="xl",
