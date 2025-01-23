@@ -1,0 +1,12 @@
+pandas==2.2.2
+gunicorn
+requests==2.32.3
+plotly==5.5.0
+dash-mantine-components
+dash_iconify
+flask==2.2.5
+langchain
+langchain-community
+pinecone
+dash
+openai

@@ -61,8 +61,8 @@ def run_chatbot(n_clicks, n_submit, user_input, chat_history):
     prompt_input = user_input
     results = ai_utils.similarity_search_with_relevance_scores_pinecone(prompt_input, top_k=30)
 
-    if len(results) == 0 or results[0][1] < 0.8:
-        model_output = json.dumps({"summaries": [{"Description": config.DEFAULT_REPLY}]})
+    if len(results) == 0 or results[0][1] < 0.85:
+        model_output = json.dumps({"summaries": [{"Description": config.DEFAULT_REPLY, "Source": "", "Date": ""}]})
     else:
         selected_text = ""
         for i, (doc, ratio) in enumerate(results, 1):

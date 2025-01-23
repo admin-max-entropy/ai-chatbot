@@ -4,10 +4,9 @@ import functools
 from pinecone import Pinecone
 
 
-openai.api_key = config.OPENAI_API_KEY
-
 def get_openai_embedding(text: str, model="text-embedding-ada-002") -> list:
-    response = openai.embeddings.create(input=text, model=model)
+    client = openai.OpenAI(api_key=config.OPENAI_API_KEY)
+    response = client.embeddings.create(input=text, model=model)
     return response.data[0].embedding
 
 @functools.lru_cache()
@@ -15,7 +14,7 @@ def summarize_speech(speech_text):
     """
     Function to summarize a central bank speech using OpenAI API.
     """
-    client = openai.OpenAI()
+    client = openai.OpenAI(api_key=config.OPENAI_API_KEY)
 
     completion = client.chat.completions.create(
         model="gpt-4o",
@@ -40,8 +39,9 @@ def summarize_speech(speech_text):
                                     "Title": {"type": "string"},
                                     "Description": {"type": "string"},
                                     "Source": {"type": "string"},
+                                    "Date": {"type": "string"},
                                 },
-                                "required": ["Title", "Description", "Source"]
+                                "required": ["Title", "Description", "Source", "Date"]
                             },
                             "description": "An array of key points summarizing the speech and the URL sources."
                         }

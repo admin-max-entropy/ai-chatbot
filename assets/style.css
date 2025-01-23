@@ -84,7 +84,7 @@
   .nine.columns                   { width: 74.0%;          }
   .ten.columns                    { width: 82.6666666667%; }
   .eleven.columns                 { width: 85.3333333333%; }
-  .eleven.half.columns                 { width: 92.3333333333%; }
+  .eleven.half.columns                 { width: 95.3333333333%; }
   .twelve.columns                 { width: 99.5%; margin-left: 0; }
 
   .one-third.column               { width: 30.6666666667%; }
@@ -138,7 +138,8 @@ body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 400;
-  font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #E5E7EB;
+  font-family: "Inter", sans-serif, "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 100%}
 
 
@@ -215,8 +216,6 @@ button.button-primary:hover,
 input[type="submit"].button-primary:hover,
 input[type="reset"].button-primary:hover,
 input[type="button"].button-primary:hover,
-.button.button-primary:focus,
-button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 
@@ -292,9 +291,9 @@ ul ol,
 ol ol,
 ol ul {
   margin: 1.5rem 1.5rem 1.5rem 1.5rem;
-  font-size: 80%; }
+  font-size: 120%; }
 li {
-  margin-bottom: 0.5rem; }
+  margin-bottom: 0.5rem;  font-size: 18px;}
 
 
 /* Tables
@@ -331,8 +330,6 @@ form {
   margin-bottom: 0rem; }
 p,
 ul,
-ol {
-  margin-bottom: 0.75rem; }
 
 /* Utilities
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -402,33 +399,10 @@ body {
 
 .modebar { display: none !important; }
 
-.mantine-Chip-label {
-    display: flex !important;          /* Use flexbox for consistent alignment */
-    align-items: center !important;    /* Center text vertically */
-    justify-content: center;           /* Center text horizontally (optional) */
-    height: 20px !important;           /* Set custom height */
-    line-height: 16px !important;      /* Ensure text height matches chip height */
-    padding: 0 16px !important;        /* Adjust horizontal padding */
-    box-sizing: border-box !important;  /* Ensure padding is included in width */
-}
-
-.mantine-Chip-input:checked + .mantine-Chip-label {
-    border: 0px solid white !important;
-    height: 20px !important;        /* Set the height of the chip */
-    align-items: center !important;    /* Center content vertically */
-    justify-content: center;
-    line-height: 16px !important;
-    padding: 0 16px !important;
-}
-
-.mantine-Chip-input:checked + .mantine-Chip-label .mantine-Chip-checkIcon {
-    color: white !important;
-}
-
 input[type="radio"] {
     vertical-align: middle; /* Ensures the radio button is vertically aligned with the text */
     margin-top: -2px;       /* Adjust this value if necessary to fine-tune centering */
-    transform: scale(0.98);  /* Optional: increase the size of the radio button */
+    transform: scale(1.2);  /* Optional: increase the size of the radio button */
 }
 
 .ag-theme-alpine {
@@ -448,4 +422,10 @@ input[type="radio"] {
 
 .negative-change {
     color: #D70040;
+}
+
+/* Change placeholder color for all textarea elements */
+textarea::placeholder {
+    color: #E5E7EB !important; /* Set the desired placeholder color */
+    font-style: italic; /* Optional: Make the placeholder text italic */
 }

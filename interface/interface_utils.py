@@ -7,11 +7,11 @@ from dash_iconify import DashIconify
 def textbox(text, box):
 
     style = {
-        "max-width": "60%",
+        "max-width": "100%",
         "width": "max-content",
-        "padding": "5px 10px",
         "border-radius": 25,
         "margin-bottom": 20,
+        'fontSize': '16px',
     }
 
     if box == "user":
@@ -44,11 +44,15 @@ def textbox(text, box):
                                               ],
                                               )]
 
-            lists += [dmc.ListItem(dmc.Text(text_component, style={"fontSize": "12px"}))]
+            text_component += [dmc.Button(row.get("Date", ""), variant="light", color="blue.3", radius="lg",
+                                          style={"fontSize": "12px"})]
+            lists += [dmc.ListItem(dmc.Text(text_component, style={"fontSize": "16px"}))]
 
         summary = dmc.List(lists)
 
-        textbox = html.Div(dmc.Card(summary, style=style), className="nine columns")
+        ai_style = style.copy()
+        ai_style["backgroundColor"] = "#0d0d0d"
+        textbox = html.Div(dmc.Card(summary, style=ai_style), className="eleven half columns")
 
         return html.Div([thumbnail, textbox])
 
