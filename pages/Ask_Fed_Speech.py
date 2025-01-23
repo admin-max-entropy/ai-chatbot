@@ -5,7 +5,7 @@ from dash_iconify import DashIconify
 import config
 import interface.interface_callbacks
 
-dash.register_page(__name__, order=0)
+dash.register_page(__name__, order=1)
 
 conversation = html.Div(
     id=config.APP_ID_CONVERSATION,

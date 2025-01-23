@@ -18,8 +18,11 @@ server = app.server
 
 
 def get_icon(name):
-    icon_map = {"home": "wpf:ask-question"}
-    return DashIconify(icon=icon_map["home"], height=16)
+
+    icon_map = {"Home": "grommet-icons:home",
+                "Ask fed speech": "wpf:ask-question"}
+
+    return DashIconify(icon=icon_map[name], height=16)
 
 
 def __create_page_structure():
