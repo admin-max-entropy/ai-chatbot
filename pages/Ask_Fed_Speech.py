@@ -4,6 +4,7 @@ import dash_mantine_components as dmc
 from dash_iconify import DashIconify
 import config
 import interface.interface_callbacks
+from dash_mantine_components import Image
 
 dash.register_page(__name__, order=1)
 
@@ -13,7 +14,7 @@ conversation = html.Div(
         "overflow-y": "auto",
         "display": "flex",
         "flex-direction": "column-reverse",
-        "height": "calc(90vh - 132px)",  # Dynamically calculated height
+        "height": "calc(92vh - 132px)",  # Dynamically calculated height
         "width": "60%",  # Adjusts the width
         "margin": "0 auto",  # Centers the container horizontally
         "padding": "10px",  # Adds some padding to avoid content sticking to the edges
@@ -57,11 +58,46 @@ controls = dmc.Textarea(
 
 layout = (
     html.Div(
+    children=[
+        html.Div(
+        children=[
+            dmc.Popover(
+                [
+                    dmc.PopoverTarget(dmc.Button(
+                        "Click Me".upper(),
+            variant="subtle",
+            rightSection=DashIconify(icon="streamline:cursor-click-solid", width=20),
+            color="blue", size="xl", style={"fontWeight": "normal"},
+        )),
+                    dmc.PopoverDropdown(
+                        [
+                            dmc.Image(
+                                radius="md",
+                                src="/assets/bot_demo.png",
+                                style={
+                                    "height": "99vh",  # 80% of viewport height
+                                    "object-fit": "contain",  # Ensures the image maintains aspect ratio
+                                },
+                            )
+                        ],
+                        style={"backgroundColor": "#0d0d0d", "border": "none", "boxShadow": "none"},
+                    ),
+                ],
+                width="80%",
+                position="right",
+                withArrow=True,
+                trapFocus=True,
+                shadow="md",
+            )
+        ],
+        className="one columns",
+    ),
+        html.Div(
         children=[
             dcc.Store(id=config.APP_ID_STORE_CONTENT, data=""),
             html.Div(children=[conversation], className="row"),
-            html.Div(children=[controls], className="row"),
+            html.Div(children=[controls], className="row", style={"padding-top": '20px'}),
         ],
-        className="row",
-    ),
+        className="ten columns",
+    )], className="row",),
 )
