@@ -1,15 +1,10 @@
 """callback functions"""
 
 from dash import (
-    html,
-    dcc,
     Output,
     callback,
     Input,
     State,
-    ctx,
-    callback_context,
-    no_update,
 )
 import config
 import interface.interface_utils
