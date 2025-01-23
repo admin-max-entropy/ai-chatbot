@@ -9,6 +9,7 @@ def get_openai_embedding(text: str, model="text-embedding-ada-002") -> list:
     response = client.embeddings.create(input=text, model=model)
     return response.data[0].embedding
 
+
 @functools.lru_cache()
 def summarize_speech(speech_text):
     """
@@ -18,12 +19,16 @@ def summarize_speech(speech_text):
 
     completion = client.chat.completions.create(
         model="gpt-4o",
-
         messages=[
-            {"role": "system", "content": "You are an expert in Federal Reserve policies."},
-            {"role": "user", "content": f"Summarize the following speech:\n\n{speech_text}"}
+            {
+                "role": "system",
+                "content": "You are an expert in Federal Reserve policies.",
+            },
+            {
+                "role": "user",
+                "content": f"Summarize the following speech:\n\n{speech_text}",
+            },
         ],
-
         functions=[
             {
                 "name": "summarize_speech",
@@ -41,24 +46,28 @@ def summarize_speech(speech_text):
                                     "Source": {"type": "string"},
                                     "Date": {"type": "string"},
                                 },
-                                "required": ["Title", "Description", "Source", "Date"]
+                                "required": ["Title", "Description", "Source", "Date"],
                             },
-                            "description": "An array of key points summarizing the speech and the URL sources."
+                            "description": "An array of key points summarizing the speech and the URL sources.",
                         }
                     },
-                    "required": ["summaries"]
-                }
+                    "required": ["summaries"],
+                },
             }
         ],
-        function_call={"name": "summarize_speech"}
+        function_call={"name": "summarize_speech"},
     )
     raw_arguments = completion.choices[0].message.function_call.arguments
     return raw_arguments
 
-#summarize_speech("what is the dual mandate")
+
+# summarize_speech("what is the dual mandate")
+
 
 def get_pc():
-    pc = Pinecone(api_key="pcsk_36hKfz_6GL8ztjrsZZicZyCdeUZkEV1D3fBAcooULof9ZZ8zSq9wjjTA6BNKoE1en36KRU")
+    pc = Pinecone(
+        api_key="pcsk_36hKfz_6GL8ztjrsZZicZyCdeUZkEV1D3fBAcooULof9ZZ8zSq9wjjTA6BNKoE1en36KRU"
+    )
     return pc
 
 
@@ -82,9 +91,9 @@ def similarity_search_with_relevance_scores_pinecone(query, top_k):
 
     # Process results to return metadata and relevance scores
     processed_results = [
-        (match["metadata"], match["score"])
-        for match in results["matches"]
+        (match["metadata"], match["score"]) for match in results["matches"]
     ]
     return processed_results
+
 
 # similarity_search_with_relevance_scores_pinecone("what is the dual mandate?", top_k=30)

@@ -58,46 +58,62 @@ controls = dmc.Textarea(
 
 layout = (
     html.Div(
-    children=[
-        html.Div(
         children=[
-            dmc.Popover(
-                [
-                    dmc.PopoverTarget(dmc.Button(
-                        "Click Me".upper(),
-            variant="subtle",
-            rightSection=DashIconify(icon="streamline:cursor-click-solid", width=20),
-            color="blue", size="xl", style={"fontWeight": "normal"},
-        )),
-                    dmc.PopoverDropdown(
+            html.Div(
+                children=[
+                    dmc.Popover(
                         [
-                            dmc.Image(
-                                radius="md",
-                                src="/assets/bot_demo.png",
+                            dmc.PopoverTarget(
+                                dmc.Button(
+                                    variant="subtle",
+                                    rightSection=DashIconify(
+                                        icon="streamline:cursor-click-solid", width=30
+                                    ),
+                                    color="blue",
+                                    size="xl",
+                                    style={"fontWeight": "normal"},
+                                )
+                            ),
+                            dmc.PopoverDropdown(
+                                [
+                                    dmc.Image(
+                                        radius="md",
+                                        src="/assets/bot_demo.png",
+                                        style={
+                                            "height": "99vh",  # 80% of viewport height
+                                            "object-fit": "contain",  # Ensures the image maintains aspect ratio
+                                        },
+                                    )
+                                ],
                                 style={
-                                    "height": "99vh",  # 80% of viewport height
-                                    "object-fit": "contain",  # Ensures the image maintains aspect ratio
+                                    "backgroundColor": "#0d0d0d",
+                                    "border": "none",
+                                    "boxShadow": "none",
                                 },
-                            )
+                            ),
                         ],
-                        style={"backgroundColor": "#0d0d0d", "border": "none", "boxShadow": "none"},
+                        width="80%",
+                        position="right",
+                        withArrow=True,
+                        trapFocus=True,
+                        shadow="md",
+                    )
+                ],
+                className="one columns",
+            ),
+            html.Div(
+                children=[
+                    dcc.Store(id=config.APP_ID_STORE_CONTENT, data=""),
+                    html.Div(children=[conversation], className="row"),
+                    html.Div(
+                        children=[controls],
+                        className="row",
+                        style={"padding-top": "20px"},
                     ),
                 ],
-                width="80%",
-                position="right",
-                withArrow=True,
-                trapFocus=True,
-                shadow="md",
-            )
+                className="ten columns",
+            ),
         ],
-        className="one columns",
+        className="row",
     ),
-        html.Div(
-        children=[
-            dcc.Store(id=config.APP_ID_STORE_CONTENT, data=""),
-            html.Div(children=[conversation], className="row"),
-            html.Div(children=[controls], className="row", style={"padding-top": '20px'}),
-        ],
-        className="ten columns",
-    )], className="row",),
 )

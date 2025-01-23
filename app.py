@@ -19,8 +19,7 @@ server = app.server
 
 def get_icon(name):
 
-    icon_map = {"Home": "grommet-icons:home",
-                "Ask fed speech": "wpf:ask-question"}
+    icon_map = {"Home": "grommet-icons:home", "Ask fed speech": "wpf:ask-question"}
 
     return DashIconify(icon=icon_map[name], height=16)
 
