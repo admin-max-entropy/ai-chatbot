@@ -6,7 +6,11 @@ import config
 import interface.interface_callbacks
 from dash_mantine_components import Image
 
-dash.register_page(__name__, order=1)
+dash.register_page(__name__, order=1,
+                   title="Max Entropy",
+                   image="bot_demo.png",
+                   description='Financial Indicators & AI Insights on Central Bank Speeches',
+                   )
 
 conversation = html.Div(
     id=config.APP_ID_CONVERSATION,
